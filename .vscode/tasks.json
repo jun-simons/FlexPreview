@@ -1,64 +1,44 @@
-// See https://go.microsoft.com/fwlink/?LinkId=733558
-// for the documentation about the tasks.json format
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-            "label": "watch",
-            "dependsOn": [
-                "npm: watch:tsc",
-                "npm: watch:esbuild"
-            ],
-            "presentation": {
-                "reveal": "never"
-            },
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // We only need ONE task to run the main 'watch' script from package.json.
+            // This script handles running both tsc and esbuild at the same time.
+            "label": "Run Watch Mode",
+            "type": "npm",
+            "script": "watch",
+            "isBackground": true,
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        },
+            },
+            // We can apply MULTIPLE problem matchers to a single task.
+            // $tsc-watch is a built-in one that VS Code provides for TypeScript.
+            // $esbuild-watch is the custom one we define below.
+            "problemMatcher": [
+                "$tsc-watch",
+                "$esbuild-watch"
+            ]
+        }
+    ],
+    // By defining our custom matcher here, the task above can find and use it.
+    "problemMatchers": [
         {
-            "type": "npm",
-            "script": "watch:esbuild",
-            "group": "build",
-            "problemMatcher": "$esbuild-watch",
-            "isBackground": true,
-            "label": "npm: watch:esbuild",
-            "presentation": {
-                "group": "watch",
-                "reveal": "never"
+            "name": "esbuild-watch",
+            "owner": "esbuild",
+            "background": {
+                "activeOnStart": true,
+                "beginsPattern": "^\\[watch\\] build started$",
+                "endsPattern": "^\\[watch\\] build finished$"
+            },
+            "pattern": {
+                // This regex captures the file path, line/col, and error message from esbuild's output
+                "regexp": "^\\s*>\\s(.*?):(\\d+):(\\d+):\\s*(?:error|warning):\\s*(.*)$",
+                "file": 1,
+                "line": 2,
+                "column": 3,
+                "message": 4
             }
-        },
-		{
-            "type": "npm",
-            "script": "watch:tsc",
-            "group": "build",
-            "problemMatcher": "$tsc-watch",
-            "isBackground": true,
-            "label": "npm: watch:tsc",
-            "presentation": {
-                "group": "watch",
-                "reveal": "never"
-            }
-        },
-		{
-			"type": "npm",
-			"script": "watch-tests",
-			"problemMatcher": "$tsc-watch",
-			"isBackground": true,
-			"presentation": {
-				"reveal": "never",
-				"group": "watchers"
-			},
-			"group": "build"
-		},
-		{
-			"label": "tasks: watch-tests",
-			"dependsOn": [
-				"npm: watch",
-				"npm: watch-tests"
-			],
-			"problemMatcher": []
-		}
-	]
+        }
+    ]
 }
