@@ -26,8 +26,8 @@ class MobilePreviewPanel {
 
         // Otherwise, create a new panel.
         const panel = vscode.window.createWebviewPanel(
-            'mobilePreview', // Identifies the type of the webview. Used internally
-            'Mobile Preview', // Title of the panel displayed to the user
+            'flexPreview', // Identifies the type of the webview. Used internally
+            'Flex Preview', // Title of the panel displayed to the user
             column, // Editor column to show the new webview panel in.
             {
                 // Enable JavaScript in the webview
@@ -143,7 +143,7 @@ function getNonce() {
  */
 export function activate(context: vscode.ExtensionContext) {
 
-    console.log('Congratulations, your extension "mobile-device-preview" is now active!');
+    console.log('Congratulations, your extension "flex-preview" is now active!');
 
     // Define preset device resolutions (width x height in logical pixels)
     const presetDevices = {
@@ -157,7 +157,7 @@ export function activate(context: vscode.ExtensionContext) {
     let mobilePreviewPanel: MobilePreviewPanel | undefined;
 
     // Register command to show the mobile preview panel
-    let disposableShow = vscode.commands.registerCommand('mobilePreview.show', async () => {
+    let disposableShow = vscode.commands.registerCommand('flexPreview.show', async () => {
         // Create or show the panel
         MobilePreviewPanel.createOrShow(context.extensionUri, vscode.ViewColumn.Beside);
         mobilePreviewPanel = MobilePreviewPanel.currentPanel;
@@ -179,9 +179,9 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     // Register command to set custom resolution
-    let disposableCustom = vscode.commands.registerCommand('mobilePreview.setCustomResolution', async () => {
+    let disposableCustom = vscode.commands.registerCommand('flexPreview.setCustomResolution', async () => {
         if (!mobilePreviewPanel) {
-            vscode.window.showWarningMessage('Please open the Mobile Preview panel first.');
+            vscode.window.showWarningMessage('Please open the Flex Preview panel first.');
             return;
         }
 
@@ -214,9 +214,9 @@ export function activate(context: vscode.ExtensionContext) {
     });
 
     // Register command to select preset resolution
-    let disposablePreset = vscode.commands.registerCommand('mobilePreview.setPresetResolution', async () => {
+    let disposablePreset = vscode.commands.registerCommand('flexPreview.setPresetResolution', async () => {
         if (!mobilePreviewPanel) {
-            vscode.window.showWarningMessage('Please open the Mobile Preview panel first.');
+            vscode.window.showWarningMessage('Please open the Flex Preview panel first.');
             return;
         }
 
