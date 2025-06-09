@@ -220,7 +220,7 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        const quickPickItems = Object.keys(presetDevices).map(key => ({
+        const quickPickItems = (Object.keys(presetDevices) as Array<keyof typeof presetDevices>).map(key => ({
             label: key,
             description: `${presetDevices[key].width}x${presetDevices[key].height}px`
         }));
@@ -230,6 +230,7 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
         if (selectedItem) {
+            // Again, use a type assertion for selectedItem.label when accessing presetDevices
             const device = presetDevices[selectedItem.label as keyof typeof presetDevices];
             mobilePreviewPanel.postMessage('updateDimensions', { width: device.width, height: device.height });
             vscode.window.showInformationMessage(`Preview updated to ${selectedItem.label} resolution.`);

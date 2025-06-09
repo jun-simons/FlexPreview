@@ -19,15 +19,15 @@
       },
       {
         "command": "flex-preview.show",
-        "title": "Mobile Preview: Show Preview"
+        "title": "Flex Preview: Show Preview"
       },
       {
           "command": "flex-preview.setCustomResolution",
-          "title": "Mobile Preview: Set Custom Resolution"
+          "title": "Flex Preview: Set Custom Resolution"
       },
       {
           "command": "flex-preview.setPresetResolution",
-          "title": "Mobile Preview: Select Preset Resolution"
+          "title": "Flex Preview: Select Preset Resolution"
       }
     ]
   },
