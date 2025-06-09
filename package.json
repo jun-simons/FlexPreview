@@ -18,15 +18,15 @@
         "title": "Hello World"
       },
       {
-        "command": "mobilePreview.show",
+        "command": "flex-preview.show",
         "title": "Mobile Preview: Show Preview"
       },
       {
-          "command": "mobilePreview.setCustomResolution",
+          "command": "flex-preview.setCustomResolution",
           "title": "Mobile Preview: Set Custom Resolution"
       },
       {
-          "command": "mobilePreview.setPresetResolution",
+          "command": "flex-preview.setPresetResolution",
           "title": "Mobile Preview: Select Preset Resolution"
       }
     ]
