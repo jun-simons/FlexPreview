@@ -93,7 +93,7 @@ class MobilePreviewPanel {
         const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'webview', 'style.css'));
 
         // Use a content security policy to only allow loading images from https or from our extension.
-        // const nonce = getNonce();
+        const nonce = getNonce();
 
         this._panel.webview.html = `
             <!DOCTYPE html>
@@ -122,6 +122,121 @@ class MobilePreviewPanel {
     public postMessage(command: string, data: any) {
         this._panel.webview.postMessage({ command, ...data });
     }
+}
+
+
+/**
+ * Generates a random nonce for Content Security Policy.
+ */
+function getNonce() {
+    let text = '';
+    const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < 32; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+    return text;
+}
+
+/**
+ * This method is called when your extension is activated.
+ * Your extension is activated the very first time the command is executed.
+ */
+export function activate(context: vscode.ExtensionContext) {
+
+    console.log('Congratulations, your extension "mobile-device-preview" is now active!');
+
+    // Define preset device resolutions (width x height in logical pixels)
+    const presetDevices = {
+        'iPhone 15 Pro': { width: 393, height: 852 },
+        'Google Pixel 8': { width: 412, height: 915 },
+        'iPad Air': { width: 820, height: 1180 },
+        'Small Android Phone': { width: 360, height: 640 }, // Example small phone
+        'Large Tablet (Landscape)': { width: 1366, height: 1024 } // Example large tablet
+    };
+
+    let mobilePreviewPanel: MobilePreviewPanel | undefined;
+
+    // Register command to show the mobile preview panel
+    let disposableShow = vscode.commands.registerCommand('mobilePreview.show', async () => {
+        // Create or show the panel
+        MobilePreviewPanel.createOrShow(context.extensionUri, vscode.ViewColumn.Beside);
+        mobilePreviewPanel = MobilePreviewPanel.currentPanel;
+
+        if (mobilePreviewPanel) {
+            const url = await vscode.window.showInputBox({
+                prompt: 'Enter the URL of your web application (e.g., http://localhost:3000)',
+                value: 'http://localhost:3000' // Default value
+            });
+
+            if (url) {
+                mobilePreviewPanel.postMessage('updateUrl', { url });
+                // Set a default initial resolution
+                mobilePreviewPanel.postMessage('updateDimensions', { width: 393, height: 852 }); // iPhone 15 Pro default
+            } else {
+                vscode.window.showInformationMessage('URL is required to show the preview.');
+            }
+        }
+    });
+
+    // Register command to set custom resolution
+    let disposableCustom = vscode.commands.registerCommand('mobilePreview.setCustomResolution', async () => {
+        if (!mobilePreviewPanel) {
+            vscode.window.showWarningMessage('Please open the Mobile Preview panel first.');
+            return;
+        }
+
+        const widthStr = await vscode.window.showInputBox({
+            prompt: 'Enter custom width (pixels)',
+            placeHolder: 'e.g., 400'
+        });
+
+        if (!widthStr) return;
+        const width = parseInt(widthStr, 10);
+        if (isNaN(width) || width <= 0) {
+            vscode.window.showErrorMessage('Invalid width. Please enter a positive number.');
+            return;
+        }
+
+        const heightStr = await vscode.window.showInputBox({
+            prompt: 'Enter custom height (pixels)',
+            placeHolder: 'e.g., 700'
+        });
+
+        if (!heightStr) return;
+        const height = parseInt(heightStr, 10);
+        if (isNaN(height) || height <= 0) {
+            vscode.window.showErrorMessage('Invalid height. Please enter a positive number.');
+            return;
+        }
+
+        mobilePreviewPanel.postMessage('updateDimensions', { width, height });
+        vscode.window.showInformationMessage(`Preview updated to custom resolution: ${width}x${height}`);
+    });
+
+    // Register command to select preset resolution
+    let disposablePreset = vscode.commands.registerCommand('mobilePreview.setPresetResolution', async () => {
+        if (!mobilePreviewPanel) {
+            vscode.window.showWarningMessage('Please open the Mobile Preview panel first.');
+            return;
+        }
+
+        const quickPickItems = Object.keys(presetDevices).map(key => ({
+            label: key,
+            description: `${presetDevices[key].width}x${presetDevices[key].height}px`
+        }));
+
+        const selectedItem = await vscode.window.showQuickPick(quickPickItems, {
+            placeHolder: 'Select a preset device resolution'
+        });
+
+        if (selectedItem) {
+            const device = presetDevices[selectedItem.label as keyof typeof presetDevices];
+            mobilePreviewPanel.postMessage('updateDimensions', { width: device.width, height: device.height });
+            vscode.window.showInformationMessage(`Preview updated to ${selectedItem.label} resolution.`);
+        }
+    });
+
+    context.subscriptions.push(disposableShow, disposableCustom, disposablePreset);
 }
 
 // This method is called when your extension is deactivated
