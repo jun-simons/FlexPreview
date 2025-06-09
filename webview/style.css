@@ -1,0 +1,58 @@
+/* Ensure the body and html take full height of the webview */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* Prevent scrolling on the webview itself */
+    font-family: 'Inter', sans-serif; /* Use Inter font */
+}
+
+/* Container to center the device frame */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: var(--vscode-editor-background); /* Use VSCode background color */
+}
+
+.device-frame {
+    /* Basic device frame styling */
+    background-color: var(--vscode-sideBar-background); /* Darker background for the frame */
+    border: 8px solid var(--vscode-editorGroup-border); /* Border to simulate a bezel */
+    border-radius: 25px; /* Rounded corners for the device */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Soft shadow for depth */
+    overflow: hidden; /* Hide content outside rounded corners */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease; /* Smooth transitions for resizing */
+    flex-shrink: 0; /* Prevent shrinking when container is small */
+}
+
+/* Styles for the iframe */
+#preview-iframe {
+    border: none; /* No border for the iframe itself */
+    width: 100%;
+    height: 100%;
+    background-color: white; /* Default background for the iframe content */
+    display: block; /* Remove extra space below iframe */
+    transition: width 0.3s ease, height 0.3s ease; /* Smooth transitions for iframe resizing */
+}
+
+/* Adjustments for various VSCode themes */
+body.vscode-light .device-frame {
+    border-color: #ccc;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+body.vscode-dark .device-frame {
+    border-color: #444;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.vscode-high-contrast .device-frame {
+    border-color: var(--vscode-editorGroup-border);
+    box-shadow: none;
+}
