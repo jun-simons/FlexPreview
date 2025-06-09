@@ -16,6 +16,18 @@
       {
         "command": "flex-preview.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "mobilePreview.show",
+        "title": "Mobile Preview: Show Preview"
+      },
+      {
+          "command": "mobilePreview.setCustomResolution",
+          "title": "Mobile Preview: Set Custom Resolution"
+      },
+      {
+          "command": "mobilePreview.setPresetResolution",
+          "title": "Mobile Preview: Select Preset Resolution"
       }
     ]
   },
