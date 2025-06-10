@@ -10,10 +10,10 @@
     "Other"
   ],
   "activationEvents": [
-  "onCommand:flexPreview.show",
-  "onCommand:flexPreview.setCustomResolution",
-  "onCommand:flexPreview.setPresetResolution"
-],
+    "onCommand:flexPreview.show",
+    "onCommand:flexPreview.setCustomResolution",
+    "onCommand:flexPreview.setPresetResolution"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
