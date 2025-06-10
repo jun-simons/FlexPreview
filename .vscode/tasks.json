@@ -10,18 +10,13 @@
                 "kind": "build",
                 "isDefault": true
             },
-            // The problemMatcher property can be an array that mixes
-            // string references (for built-in matchers) and full objects (for custom ones).
             "problemMatcher": [
-                // This is the built-in matcher for TypeScript's watch mode.
                 "$tsc-watch",
-
-                // This is our custom matcher for esbuild, defined directly inline.
                 {
                     "owner": "esbuild",
                     "fileLocation": "relative",
                     "pattern": {
-                        // This regex captures the file path, line/col, and error message from esbuild's output
+                        // regex captures the file path, line/col, and error message from esbuild's output
                         "regexp": "^\\s*>\\s(.*?):(\\d+):(\\d+):\\s*(?:error|warning):\\s*(.*)$",
                         "file": 1,
                         "line": 2,
