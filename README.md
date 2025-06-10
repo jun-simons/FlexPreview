@@ -1,6 +1,8 @@
-# flex-preview README
+# Flex Preview
 
-This is the README for your extension "flex-preview". After writing up a brief description, we recommend including the following sections.
+Flex Preview is a VSCode Extension that allows easy mobile previews for any custom device resolution.
+
+(README to be written later...)
 
 ## Features
 
