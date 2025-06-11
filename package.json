@@ -2,7 +2,7 @@
   "name": "flex-preview",
   "displayName": "flex-preview",
   "description": "Preview websites on mobile devices with flexible sizing",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.90.0"
   },
