@@ -1,3 +1,5 @@
+/* webview/style.css */
+
 /* Ensure the body and html take full height of the webview */
 html, body {
     margin: 0;
@@ -14,7 +16,9 @@ html, body {
     align-items: center;
     height: 100%;
     width: 100%;
-    background-color: var(--vscode-editor-background); /* Use VSCode background color */
+    background-color: var(--vscode-editor-background); 
+    padding: 20px; 
+    box-sizing: border-box;
 }
 
 .device-frame {
@@ -22,26 +26,28 @@ html, body {
     background-color: var(--vscode-sideBar-background); /* Darker background for the frame */
     border: 8px solid var(--vscode-editorGroup-border); /* Border to simulate a bezel */
     border-radius: 25px; /* Rounded corners for the device */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Soft shadow for depth */
-    overflow: hidden; /* Hide content outside rounded corners */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease; /* Smooth transitions for resizing */
+    /* transform to the transition for smooth scaling */
+    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, transform 0.3s ease;
     flex-shrink: 0; /* Prevent shrinking when container is small */
+    /* Set origin point for the scale transform to the center */
+    transform-origin: center center;
 }
 
-/* Styles for the iframe */
+
 #preview-iframe {
-    border: none; /* No border for the iframe itself */
+    border: none;
     width: 100%;
     height: 100%;
-    background-color: white; /* Default background for the iframe content */
-    display: block; /* Remove extra space below iframe */
-    transition: width 0.3s ease, height 0.3s ease; /* Smooth transitions for iframe resizing */
+    background-color: white;
+    display: block;
 }
 
-/* Adjustments for various VSCode themes */
+/* adjust for VSCode themes */
 body.vscode-light .device-frame {
     border-color: #ccc;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
