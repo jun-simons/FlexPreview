@@ -1,6 +1,6 @@
 # Flex Preview
 
-Flex Preview is a VSCode Extension that allows easy mobile previews for any custom device resolution.
+Flex Preview is a VSCode Extension that allows easy mobile previews for any custom device resolution.  It currently supports multiple preset device resolutions in addition to custom scaling.
 
 (README to be written later...)
 
