@@ -32,7 +32,6 @@ function updateScale() {
     deviceFrame.style.transform = `scale(${scale})`;
 }
 
-
 /**
  * Handles messages received from the VSCode extension.
  * @param {MessageEvent} event The message event.
@@ -76,7 +75,7 @@ window.addEventListener('message', event => {
 });
 
 // re-calcualte scale on window resize
-window.addEventListener('resize', postMessage);
+window.addEventListener('resize', updateScale);
 
 document.addEventListener('DOMContentLoaded', () => {
     vscode.postMessage({ command: 'webviewReady', text: 'Webview is fully loaded and ready for commands.' });
