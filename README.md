@@ -29,25 +29,17 @@ This extension contributes the following settings:
 * `myExtension.enable`: Enable/disable this extension.
 * `myExtension.thing`: Set to `blah` to do something.
 
-## Known Issues
+<!-- ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Calling out known issues can help limit users opening duplicate issues against your extension. -->
 
-## Release Notes
+<!-- ## Release Notes
 
-Users appreciate release notes as you update your extension.
+Users appreciate release notes as you update your extension. -->
 
 ### 1.0.0
 
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+Initial release of Flex Preview.
 
 ---
 
