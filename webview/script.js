@@ -18,9 +18,6 @@ function updateScale() {
     const deviceWidth = deviceFrame.offsetWidth;
     const deviceHeight = deviceFrame.offsetHeight;
 
-    // Add a log to see the measured dimensions
-    console.log(`Device dimensions: ${deviceWidth}w x ${deviceHeight}h`);
-
     if (deviceWidth === 0 || deviceHeight === 0) {
         return; // avoid div by 0 if not yet rendered
     }
@@ -33,9 +30,6 @@ function updateScale() {
 
     // pick smaller ratio so it fits in extension
     const scale = Math.min(scaleX, scaleY, 1);
-
-    // Add a log to see the final calculated scale
-    console.log(`Container: ${containerWidth}w, Calculated scale: ${scale}`);
 
     deviceFrame.style.transform = `scale(${scale})`;
 }
@@ -59,6 +53,9 @@ window.addEventListener('message', event => {
             if (deviceFrame && iframe) {
                 const width = message.width;
                 const height = message.height;
+                
+                // reset transform immediately
+                deviceFrame.style.transform = 'scale(1)';
 
                 // apply new width and height
                 deviceFrame.style.width = `${width}px`;
@@ -76,7 +73,15 @@ window.addEventListener('message', event => {
                 }
                 // update scale after dimensions are applied 
                 // timeout allows DOM to update before measuring
-                setTimeout(updateScale, 50);
+                // setTimeout(updateScale, 50);
+                
+                // try requestAnimationFrame for more reliable update
+                requestAnimationFrame(() => {
+                    // ensure browser has completed layout before changing css
+                    requestAnimationFrame(() => {
+                        updateScale();
+                    });
+                });
             }
             break;
     }
