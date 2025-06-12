@@ -105,8 +105,10 @@ class MobilePreviewPanel {
                 <link href="${styleUri}" rel="stylesheet">
             </head>
             <body>
-                <div class="device-frame">
-                    <iframe id="preview-iframe" src="about:blank"></iframe>
+                <div class="container">
+                    <div class="device-frame">
+                        <iframe id="preview-iframe" src="about:blank"></iframe>
+                    </div>
                 </div>
                 <script nonce="${nonce}" src="${scriptUri}"></script>
             </body>

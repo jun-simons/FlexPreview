@@ -17,6 +17,10 @@ function updateScale() {
     // true device dims (including borders)
     const deviceWidth = deviceFrame.offsetWidth;
     const deviceHeight = deviceFrame.offsetHeight;
+
+    // Add a log to see the measured dimensions
+    console.log(`Device dimensions: ${deviceWidth}w x ${deviceHeight}h`);
+
     if (deviceWidth === 0 || deviceHeight === 0) {
         return; // avoid div by 0 if not yet rendered
     }
@@ -29,6 +33,10 @@ function updateScale() {
 
     // pick smaller ratio so it fits in extension
     const scale = Math.min(scaleX, scaleY, 1);
+
+    // Add a log to see the final calculated scale
+    console.log(`Container: ${containerWidth}w, Calculated scale: ${scale}`);
+
     deviceFrame.style.transform = `scale(${scale})`;
 }
 
