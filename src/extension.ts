@@ -153,10 +153,16 @@ export function activate(context: vscode.ExtensionContext) {
     // Define preset device resolutions (width x height in logical pixels)
     const presetDevices = {
         'iPhone 15 Pro': { width: 393, height: 852 },
+        'iPhone 15 Pro (Landscape)': { width: 852, height: 393 },
+        'iPhone 16 Pro Max': { width: 440, height: 956 },
+        'iPhone 13 mini': { width: 360, height: 780 },
         'Google Pixel 8': { width: 412, height: 915 },
+        'Galaxy Fold': { width: 768, height: 1076 },
         'iPad Air': { width: 820, height: 1180 },
         'Small Android Phone': { width: 360, height: 640 }, // Example small phone
-        'Large Tablet (Landscape)': { width: 1366, height: 1024 } // Example large tablet
+        'Large Tablet (Landscape)': { width: 1366, height: 1024 }, // Example large tablet
+        'MacBook Pro 13.3': { width: 1280, height: 800 },
+        'MacBook Pro 16': { width: 1536, height: 960 }
     };
 
     let mobilePreviewPanel: MobilePreviewPanel | undefined;
