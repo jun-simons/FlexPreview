@@ -19,6 +19,7 @@ html, body {
     background-color: var(--vscode-editor-background); 
     padding: 20px; 
     box-sizing: border-box;
+    position: relative;
 }
 
 .device-frame {
@@ -28,14 +29,20 @@ html, body {
     border-radius: 25px; /* Rounded corners for the device */
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
     overflow: hidden;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
     display: flex;
     justify-content: center;
     align-items: center;
     /* transform to the transition for smooth scaling */
     transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, transform 0.3s ease;
-    flex-shrink: 0; /* Prevent shrinking when container is small */
+    /* flex-shrink: 0; Prevent shrinking when container is small */
     /* Set origin point for the scale transform to the center */
     transform-origin: center center;
+    transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, transform 0.3s ease;
 }
 
 

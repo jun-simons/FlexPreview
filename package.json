@@ -19,7 +19,7 @@
     "commands": [
       {
         "command": "flexPreview.show",
-        "title": "Flex Preview: Show Preview"
+        "title": "Flex Preview: Show Extension"
       },
       {
           "command": "flexPreview.setCustomResolution",

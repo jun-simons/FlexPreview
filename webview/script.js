@@ -10,16 +10,20 @@ const container = document.querySelector('.container');
  * within the container.
  */
 function updateScale() {
+    //debug code
+    console.log('--- updateScale called ---');
+
     if (!deviceFrame || !container) {
+        console.error('deviceFrame or container not found!'); //debug code
         return;
     }
-
     // true device dims (including borders)
     const deviceWidth = deviceFrame.offsetWidth;
     const deviceHeight = deviceFrame.offsetHeight;
+    console.log(`Measured device dimensions: ${deviceWidth}w x ${deviceHeight}h`); //debug code
 
     if (deviceWidth === 0 || deviceHeight === 0) {
-        return; // avoid div by 0 if not yet rendered
+        return;
     }
     
     // use available container space to find scale ratio
@@ -30,8 +34,9 @@ function updateScale() {
 
     // pick smaller ratio so it fits in extension
     const scale = Math.min(scaleX, scaleY, 1);
+    console.log(`Container width: ${containerWidth}, Calculated scale: ${scale}`);
 
-    deviceFrame.style.transform = `scale(${scale})`;
+    deviceFrame.style.transform = `translate(-50%, -50%) scale(${scale})`;
 }
 
 /**
@@ -53,6 +58,7 @@ window.addEventListener('message', event => {
             if (deviceFrame && iframe) {
                 const width = message.width;
                 const height = message.height;
+                console.log(`Received new dimensions: ${width}w x ${height}h`);
                 
                 // reset transform immediately
                 deviceFrame.style.transform = 'scale(1)';
@@ -76,12 +82,16 @@ window.addEventListener('message', event => {
                 // setTimeout(updateScale, 50);
                 
                 // try requestAnimationFrame for more reliable update
-                requestAnimationFrame(() => {
-                    // ensure browser has completed layout before changing css
-                    requestAnimationFrame(() => {
-                        updateScale();
-                    });
-                });
+                // requestAnimationFrame(() => {
+                //     // ensure browser has completed layout before changing css
+                //     requestAnimationFrame(() => {
+                //         updateScale();
+                //     });
+                // });
+
+                void deviceFrame.offsetWidth;
+                updateScale();
+                setTimeout(updateScale, 200);
             }
             break;
     }
