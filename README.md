@@ -29,13 +29,19 @@ For precise testing, use the Command Palette to set any custom width and height 
 
 ## Requirements
 
-This extension requires Visual Studio Code version `1.8.0` or higher.
+This extension requires Visual Studio Code version `1.86.0` or higher.
 
 ## Extension Settings
 
 This extension does not contribute any VS Code settings at this time.
 
 ## Release Notes
+
+## [1.0.1] - 2025-06-12
+
+### Changed
+
+- Lowered the required VS Code engine version from `^1.100.0` to `^1.86.0` to support a wider range of recent editor versions.
 
 ### 1.0.0
 

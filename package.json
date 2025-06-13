@@ -3,9 +3,9 @@
   "name": "flex-preview",
   "displayName": "flex-preview",
   "description": "Preview websites on mobile devices with flexible sizing",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "engines": {
-    "vscode": "^1.100.0"
+    "vscode": "^1.86.0"
   },
   "repository": {
     "type": "git",
@@ -54,7 +54,7 @@
   "devDependencies": {
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
-    "@types/vscode": "^1.100.0",
+    "@types/vscode": "^1.86.0",
     "@typescript-eslint/eslint-plugin": "^8.31.1",
     "@typescript-eslint/parser": "^8.31.1",
     "@vscode/test-cli": "^0.0.10",
