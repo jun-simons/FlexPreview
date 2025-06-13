@@ -1,65 +1,50 @@
 # Flex Preview
 
-Flex Preview is a VSCode Extension that allows easy mobile previews for any custom device resolution.  It currently supports multiple preset device resolutions in addition to custom scaling.
+*Test responsive websites with ease!*
 
-(README to be written later...)
+Flex Preview is a VSCode Extension for easy mobile previews at any custom device resolution. It also supports multiple preset device resolutions in addition to custom scaling.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Flex Preview provides a simple and powerful way to test the responsiveness of your web applications directly within your editor.
 
-For example if there is an image subfolder under your extension project workspace:
+### Live Preview with Interactive Controls
 
-\!\[feature X\]\(images/feature-x.png\)
+Instantly launch a preview panel with a convenient dropdown menu to switch between devices. This is perfect for local development servers (e.g., `http://localhost:3000`) or viewing any live URL.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+![Interactive Device Dropdown](images/feature-dropdown.gif)
+
+### Automatic Responsive Scaling
+
+The device preview automatically and smoothly scales down to fit the available space in your editor panel. This allows you to test high-resolution tablet layouts without ever overflowing the screen, while the website inside renders at its true resolution.
+
+![Responsive Panel Scaling](images/feature-scaling.gif)
+
+### Custom Device Resolutions
+
+For precise testing, use the Command Palette to set any custom width and height you need.
+- `Flex Preview: Show Preview` - Launches the preview panel.
+- `Flex Preview: Set Custom Resolution` - Prompts for a custom width and height.
+- `Flex Preview: Select Preset Resolution` - Provides a command-based alternative to the UI dropdown.
 
 ## Requirements
 
-VSCode > 1.90.0
+This extension requires Visual Studio Code version `1.8.0` or higher.
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+This extension does not contribute any VS Code settings at this time.
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-<!-- ## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension. -->
-
-<!-- ## Release Notes
-
-Users appreciate release notes as you update your extension. -->
+## Release Notes
 
 ### 1.0.0
 
-Initial release of Flex Preview.
+Initial release of Flex Preview, featuring:
+* Live preview webview panel.
+* Preset and custom device resolutions.
+* Interactive dropdown for device selection.
+* Automatic scaling to fit the editor panel.
 
 ---
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**

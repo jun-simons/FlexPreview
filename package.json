@@ -4,7 +4,7 @@
   "description": "Preview websites on mobile devices with flexible sizing",
   "version": "1.0.0",
   "engines": {
-    "vscode": "^1.90.0"
+    "vscode": "^1.8.0"
   },
   "categories": [
     "Other"
