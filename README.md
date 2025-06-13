@@ -4,6 +4,8 @@
 
 Flex Preview is a VSCode Extension for easy mobile previews at any custom device resolution. It also supports multiple preset device resolutions in addition to custom scaling.
 
+![Interactive Device Dropdown](images/overview.png)
+
 ## Features
 
 Flex Preview provides a simple and powerful way to test the responsiveness of your web applications directly within your editor.
@@ -12,17 +14,15 @@ Flex Preview provides a simple and powerful way to test the responsiveness of yo
 
 Instantly launch a preview panel with a convenient dropdown menu to switch between devices. This is perfect for local development servers (e.g., `http://localhost:3000`) or viewing any live URL.
 
-![Interactive Device Dropdown](images/feature-dropdown.gif)
+![Interactive Device Dropdown](images/dropdown.png)
 
 ### Automatic Responsive Scaling
 
 The device preview automatically and smoothly scales down to fit the available space in your editor panel. This allows you to test high-resolution tablet layouts without ever overflowing the screen, while the website inside renders at its true resolution.
 
-![Responsive Panel Scaling](images/feature-scaling.gif)
-
 ### Custom Device Resolutions
 
-For precise testing, use the Command Palette to set any custom width and height you need.
+For precise testing, use the Command Palette to set any custom width and height you need.  For many, the preset options may be enough!
 - `Flex Preview: Show Preview` - Launches the preview panel.
 - `Flex Preview: Set Custom Resolution` - Prompts for a custom width and height.
 - `Flex Preview: Select Preset Resolution` - Provides a command-based alternative to the UI dropdown.
