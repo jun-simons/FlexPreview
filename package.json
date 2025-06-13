@@ -3,6 +3,7 @@
   "name": "flex-preview",
   "displayName": "flex-preview",
   "description": "Preview websites on mobile devices with flexible sizing",
+  "icon": "images/logo.png",
   "version": "1.0.1",
   "engines": {
     "vscode": "^1.86.0"
