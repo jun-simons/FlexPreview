@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [1.0.2], [1.0.1] - 2025-06-12
+
+### Changed
+
+- Lowered the required VS Code engine version from `^1.100.0` to `^1.86.0` to support a wider range of recent editor versions (1.0.1)
+- Added app icons and design (1.0.2)
+
 ## [1.0.0] - 2025-06-12
 
 ### Added

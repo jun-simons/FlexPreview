@@ -37,11 +37,12 @@ This extension does not contribute any VS Code settings at this time.
 
 ## Release Notes
 
-## [1.0.1] - 2025-06-12
+## [1.0.2] - 2025-06-12
 
 ### Changed
 
 - Lowered the required VS Code engine version from `^1.100.0` to `^1.86.0` to support a wider range of recent editor versions.
+- Added app icon/logo
 
 ### 1.0.0
 
