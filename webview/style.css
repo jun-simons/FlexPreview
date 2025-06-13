@@ -9,17 +9,37 @@ html, body {
     font-family: 'Inter', sans-serif; /* Use Inter font */
 }
 
-/* Container to center the device frame */
+
+.controls {
+    padding: 8px 15px;
+    background-color: var(--vscode-sideBar-background);
+    border-bottom: 1px solid var(--vscode-editorGroup-border);
+    color: var(--vscode-foreground);
+    text-align: center;
+}
+
+.controls label {
+    margin-right: 8px;
+    font-size: 13px;
+}
+
+.controls select {
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--vscode-input-border);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+}
+
+/* The container now takes up the remaining space */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+    /* calc(100% - 45px) accounts for the height of the controls bar */
+    height: calc(100% - 45px); 
     width: 100%;
-    background-color: var(--vscode-editor-background); 
-    padding: 20px; 
-    box-sizing: border-box;
     position: relative;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .device-frame {

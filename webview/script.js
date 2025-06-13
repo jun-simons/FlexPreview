@@ -5,8 +5,33 @@ const vscode = acquireVsCodeApi();
 const iframe = document.getElementById('preview-iframe');
 const deviceFrame = document.querySelector('.device-frame');
 const container = document.querySelector('.container');
+const deviceSelect = document.getElementById('device-select');
 
 const BORDER_WIDTH = 16; // 8px border per side
+let loadedDevices = {}; 
+
+/**
+ * A reusable function to set the dimensions and update the scale.
+ * @param {number} width 
+ * @param {number} height 
+ */
+function setDimensions(width, height) {
+    if (deviceFrame && iframe) {
+        // Apply the new styles.
+        deviceFrame.style.width = `${width}px`;
+        deviceFrame.style.height = `${height}px`;
+        iframe.style.width = `100%`;
+        iframe.style.height = `100%`;
+
+        if (width > 600 || height > 1000) {
+            deviceFrame.style.borderRadius = '15px';
+        } else {
+            deviceFrame.style.borderRadius = '25px';
+        }
+        
+        updateScale(width, height);
+    }
+}
 
 /**
  * Calculates and applies the correct scale.
@@ -82,10 +107,39 @@ window.addEventListener('message', event => {
                 updateScale(width, height);
             }
             break;
+            case 'loadDevices':
+                loadedDevices = message.devices;
+                deviceSelect.innerHTML = ''; // clear existing options
+    
+                // create a default "Custom" option for when a custom resolution is set
+                const customOption = document.createElement('option');
+                customOption.value = "custom";
+                customOption.textContent = "Custom";
+                deviceSelect.appendChild(customOption);
+                
+                // populate the dropdown with devices
+                for (const deviceName in loadedDevices) {
+                    const option = document.createElement('option');
+                    option.value = deviceName;
+                    option.textContent = `${deviceName} (${loadedDevices[deviceName].width}x${loadedDevices[deviceName].height})`;
+                    deviceSelect.appendChild(option);
+                }
+                // set the dropdown to the initial device if possible
+                deviceSelect.value = "iPhone 15 Pro";
+                break;
     }
 });
 
-// call updateScale without arguments for default load
+// event listner for dropdown menu
+deviceSelect.addEventListener('change', (event) => {
+    const selectedDeviceName = event.target.value;
+    if (selectedDeviceName && loadedDevices[selectedDeviceName]) {
+        const device = loadedDevices[selectedDeviceName];
+        setDimensions(device.width, device.height);
+    }
+});
+
+// event listner: call updateScale without arguments for default load
 window.addEventListener('resize', () => updateScale());
 
 document.addEventListener('DOMContentLoaded', () => {

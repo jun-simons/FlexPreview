@@ -15,37 +15,35 @@ class MobilePreviewPanel {
      * @param extensionUri The extension's URI, used to resolve local resources.
      * @param viewColumn The column in which to show the panel.
      */
-    public static createOrShow(extensionUri: vscode.Uri, viewColumn: vscode.ViewColumn | undefined) {
+    public static createOrShow(extensionUri: vscode.Uri, viewColumn: vscode.ViewColumn | undefined, presetDevices: object) {
         const column = viewColumn || vscode.ViewColumn.Beside;
 
-        // If we already have a panel, show it.
         if (MobilePreviewPanel.currentPanel) {
             MobilePreviewPanel.currentPanel._panel.reveal(column);
             return;
         }
 
-        // Otherwise, create a new panel.
         const panel = vscode.window.createWebviewPanel(
-            'flexPreview', // Identifies the type of the webview. Used internally
-            'Flex Preview', // Title of the panel displayed to the user
-            column, // Editor column to show the new webview panel in.
+            'flexPreview', 'Flex Preview', column,
             {
-                // Enable JavaScript in the webview
                 enableScripts: true,
-                // Restrict the webview to only loading content from our extension's `webview` directory.
                 localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'webview')]
             }
         );
 
-        MobilePreviewPanel.currentPanel = new MobilePreviewPanel(panel, extensionUri);
+        MobilePreviewPanel.currentPanel = new MobilePreviewPanel(panel, extensionUri, presetDevices);
     }
 
-    private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri) {
+    private constructor(panel: vscode.WebviewPanel, extensionUri: vscode.Uri, presetDevices: object) {
         this._panel = panel;
         this._extensionUri = extensionUri;
 
         // Set the webview's HTML content
         this._updateWebview();
+
+        // send device list to webview
+        this._panel.webview.postMessage({ command: 'loadDevices', devices: presetDevices });
+        this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
 
         // Listen for when the panel is disposed
         // This happens when the user closes the panel or when the panel is closed programmatically
@@ -105,6 +103,11 @@ class MobilePreviewPanel {
                 <link href="${styleUri}" rel="stylesheet">
             </head>
             <body>
+                <div class="controls">
+                    <label for="device-select">Device:</label>
+                    <select id="device-select">
+                        </select>
+                </div>
                 <div class="container">
                     <div class="device-frame">
                         <iframe id="preview-iframe" src="about:blank"></iframe>
@@ -161,19 +164,19 @@ export function activate(context: vscode.ExtensionContext) {
     // Register command to show the mobile preview panel
     let disposableShow = vscode.commands.registerCommand('flexPreview.show', async () => {
         // Create or show the panel
-        MobilePreviewPanel.createOrShow(context.extensionUri, vscode.ViewColumn.Beside);
-        mobilePreviewPanel = MobilePreviewPanel.currentPanel;
+        MobilePreviewPanel.createOrShow(context.extensionUri, vscode.ViewColumn.Beside, presetDevices);
 
-        if (mobilePreviewPanel) {
+        if (MobilePreviewPanel.currentPanel) {
             const url = await vscode.window.showInputBox({
                 prompt: 'Enter the URL of your web application (e.g., http://localhost:3000)',
                 value: 'http://localhost:3000' // Default value
             });
 
             if (url) {
-                mobilePreviewPanel.postMessage('updateUrl', { url });
-                // Set a default initial resolution
-                mobilePreviewPanel.postMessage('updateDimensions', { width: 393, height: 852 }); // iPhone 15 Pro default
+                MobilePreviewPanel.currentPanel.postMessage('updateUrl', { url });
+                // Set default initial resolution
+                const defaultDevice = presetDevices['iPhone 15 Pro'];
+                MobilePreviewPanel.currentPanel.postMessage('updateDimensions', { width: defaultDevice.width, height: defaultDevice.height });
             } else {
                 vscode.window.showInformationMessage('URL is required to show the preview.');
             }
