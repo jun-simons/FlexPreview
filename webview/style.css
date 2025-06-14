@@ -47,6 +47,7 @@ html, body {
     color: var(--vscode-input-foreground);
 }
 
+/* Hide ugly spinners */
 .controls input[type="number"]::-webkit-outer-spin-button,
 .controls input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -55,7 +56,6 @@ html, body {
 .controls input[type="number"] {
     -moz-appearance: textfield;
 }
-
 
 /* The container now takes up the remaining space */
 .container {

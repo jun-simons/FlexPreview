@@ -6,6 +6,8 @@ const iframe = document.getElementById('preview-iframe');
 const deviceFrame = document.querySelector('.device-frame');
 const container = document.querySelector('.container');
 const deviceSelect = document.getElementById('device-select');
+const widthInput = document.getElementById('width-input');
+const heightInput = document.getElementById('height-input');
 
 const BORDER_WIDTH = 16; // 8px border per side
 let loadedDevices = {}; 
@@ -28,8 +30,24 @@ function setDimensions(width, height) {
         } else {
             deviceFrame.style.borderRadius = '25px';
         }
+
+        widthInput.value = width;
+        heightInput.value = height;
         
         updateScale(width, height);
+    }
+}
+
+/* Handles input from custom width/height boxes */
+function handleCustomInput() {
+    const customWidth = parseInt(widthInput.value, 10);
+    const customHeight = parseInt(heightInput.value, 10);
+
+    // If the input values are valid numbers, update the preview
+    if (!isNaN(customWidth) && !isNaN(customHeight) && customWidth > 0 && customHeight > 0) {
+        // Set the dropdown to "Custom"
+        deviceSelect.value = 'custom';
+        setDimensions(customWidth, customHeight);
     }
 }
 
@@ -40,25 +58,19 @@ function setDimensions(width, height) {
  * @param {number} [targetHeight] - The target content height of the device.
  */
 function updateScale(targetWidth, targetHeight) {
-    if (!deviceFrame || !container) {
-        return;
-    }
-
-    let deviceTotalWidth;
-    let deviceTotalHeight;
+    if (!deviceFrame || !container) { return; }
+    let deviceTotalWidth, deviceTotalHeight;
 
     // If target dims are passed in (from a preset change), use them directly
     if (targetWidth && targetHeight) {
-        // Calculate the total width including the borders.
         deviceTotalWidth = targetWidth + BORDER_WIDTH;
-        deviceTotalHeight = targetHeight + BORDER_WIDTH; // Assuming square bezels
+        deviceTotalHeight = targetHeight + BORDER_WIDTH;
     } else {
         // otherwise (on resize or initial load), measure the element from the DOM.
         // only reliable if no style change has just happened 
         deviceTotalWidth = deviceFrame.offsetWidth;
         deviceTotalHeight = deviceFrame.offsetHeight;
     }
-
     if (deviceTotalWidth === 0 || deviceTotalHeight === 0) {
         return;
     }
@@ -138,6 +150,10 @@ deviceSelect.addEventListener('change', (event) => {
         setDimensions(device.width, device.height);
     }
 });
+
+// event listner for custom input boxes
+widthInput.addEventListener('input', handleCustomInput);
+heightInput.addEventListener('input', handleCustomInput);
 
 // event listner: call updateScale without arguments for default load
 window.addEventListener('resize', () => updateScale());
