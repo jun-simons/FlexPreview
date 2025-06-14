@@ -27,7 +27,8 @@ class MobilePreviewPanel {
             'flexPreview', 'Flex Preview', column,
             {
                 enableScripts: true,
-                localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'webview')]
+                localResourceRoots: [vscode.Uri.joinPath(extensionUri, 'webview')],
+                retainContextWhenHidden: true
             }
         );
 
@@ -191,7 +192,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Register command to set custom resolution
     let disposableCustom = vscode.commands.registerCommand('flexPreview.setCustomResolution', async () => {
-        if (!mobilePreviewPanel) {
+        if (!MobilePreviewPanel.currentPanel) {
             vscode.window.showWarningMessage('Please open the Flex Preview panel first.');
             return;
         }
@@ -220,7 +221,7 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        mobilePreviewPanel.postMessage('updateDimensions', { width, height });
+        MobilePreviewPanel.currentPanel.postMessage('updateDimensions', { width, height });
         vscode.window.showInformationMessage(`Preview updated to custom resolution: ${width}x${height}`);
     });
 
