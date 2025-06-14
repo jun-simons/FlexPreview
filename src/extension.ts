@@ -86,19 +86,15 @@ class MobilePreviewPanel {
      */
     private _updateWebview() {
         const webview = this._panel.webview;
-
-        // Get the URI for the webview's local resources
         const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'webview', 'script.js'));
         const styleUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'webview', 'style.css'));
-
-        // Use a content security policy to only allow loading images from https or from our extension.
         const nonce = getNonce();
-
+    
         this._panel.webview.html = `
             <!DOCTYPE html>
             <html lang="en">
             <head>
-                <meta charset="UTF-8">
+                <meta charset="UTF-R">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Mobile Preview</title>
                 <link href="${styleUri}" rel="stylesheet">
@@ -108,6 +104,11 @@ class MobilePreviewPanel {
                     <label for="device-select">Device:</label>
                     <select id="device-select">
                         </select>
+    
+                    <label for="width-input">Size:</label>
+                    <input type="number" id="width-input" />
+                    <span>x</span>
+                    <input type="number" id="height-input" />
                 </div>
                 <div class="container">
                     <div class="device-frame">
