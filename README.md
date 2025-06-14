@@ -39,12 +39,16 @@ This extension does not contribute any VS Code settings at this time.
 
 ## Release Notes
 
-## [1.0.2] - 2025-06-12
+## 1.0.3
 
-### Changed
+Additions:
+* UI width/height box
+* Improved smooth scaling
 
-- Lowered the required VS Code engine version from `^1.100.0` to `^1.86.0` to support a wider range of recent editor versions.
-- Added app icon/logo
+Bug fixes:
+* extension running in background fixed
+* resize command fixed
+* lowered VSCode version requireement
 
 ### 1.0.0
 

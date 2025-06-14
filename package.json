@@ -4,7 +4,7 @@
   "displayName": "flex-preview",
   "description": "Preview websites on mobile devices with flexible sizing",
   "icon": "images/minlogo.jpg",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "engines": {
     "vscode": "^1.86.0"
   },
