@@ -47,6 +47,16 @@ html, body {
     color: var(--vscode-input-foreground);
 }
 
+.controls input[type="number"]::-webkit-outer-spin-button,
+.controls input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.controls input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
 /* The container now takes up the remaining space */
 .container {
     /* calc(100% - 45px) accounts for the height of the controls bar */
