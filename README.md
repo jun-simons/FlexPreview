@@ -48,7 +48,7 @@ Additions:
 Bug fixes:
 * extension running in background fixed
 * resize command fixed
-* lowered VSCode version requireement
+* lowered VSCode version requirement
 
 ### 1.0.0
 
