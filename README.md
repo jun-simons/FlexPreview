@@ -25,7 +25,7 @@ The device preview automatically and smoothly scales down to fit the available s
 ### Custom Device Resolutions
 
 For precise testing, use the Command Palette to set any custom width and height you need.  For many, the preset options may be enough!
-- `Flex Preview: Show Preview` - Launches the preview panel.
+- `Flex Preview: Show Extension` - Launches the preview panel.
 - `Flex Preview: Set Custom Resolution` - Prompts for a custom width and height.
 - `Flex Preview: Select Preset Resolution` - Provides a command-based alternative to the UI dropdown.
 
