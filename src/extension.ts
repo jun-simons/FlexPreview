@@ -94,7 +94,7 @@ class MobilePreviewPanel {
             <!DOCTYPE html>
             <html lang="en">
             <head>
-                <meta charset="UTF-R">
+                <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Mobile Preview</title>
                 <link href="${styleUri}" rel="stylesheet">
@@ -167,7 +167,6 @@ export function activate(context: vscode.ExtensionContext) {
         'MacBook Pro 16': { width: 1536, height: 960 }
     };
 
-    let mobilePreviewPanel: MobilePreviewPanel | undefined;
 
     // Register command to show the mobile preview panel
     let disposableShow = vscode.commands.registerCommand('flexPreview.show', async () => {
@@ -228,7 +227,7 @@ export function activate(context: vscode.ExtensionContext) {
 
     // Register command to select preset resolution
     let disposablePreset = vscode.commands.registerCommand('flexPreview.setPresetResolution', async () => {
-        if (!mobilePreviewPanel) {
+        if (!MobilePreviewPanel.currentPanel) {
             vscode.window.showWarningMessage('Please open the Flex Preview panel first.');
             return;
         }
@@ -245,7 +244,7 @@ export function activate(context: vscode.ExtensionContext) {
         if (selectedItem) {
             // Again, use a type assertion for selectedItem.label when accessing presetDevices
             const device = presetDevices[selectedItem.label as keyof typeof presetDevices];
-            mobilePreviewPanel.postMessage('updateDimensions', { width: device.width, height: device.height });
+            MobilePreviewPanel.currentPanel.postMessage('updateDimensions', { width: device.width, height: device.height });
             vscode.window.showInformationMessage(`Preview updated to ${selectedItem.label} resolution.`);
         }
     });
