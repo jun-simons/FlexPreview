@@ -101,10 +101,13 @@ class MobilePreviewPanel {
             </head>
             <body>
                 <div class="controls">
+                    <label for="url-input">URL:</label>
+                    <input type="text" id="url-input" />
+
                     <label for="device-select">Device:</label>
                     <select id="device-select">
                         </select>
-    
+
                     <label for="width-input">Size:</label>
                     <input type="number" id="width-input" />
                     <span>x</span>

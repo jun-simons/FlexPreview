@@ -19,6 +19,8 @@ html, body {
     border-bottom: 1px solid var(--vscode-editorGroup-border);
     color: var(--vscode-foreground);
     font-family: 'Inter', sans-serif;
+    overflow-x: auto;
+    white-space: nowrap;
 }
 
 .controls label {
@@ -34,6 +36,7 @@ html, body {
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     margin-right: 15px;
+    flex-shrink: 0;
 }
 
 .controls input[type="number"] {
@@ -45,6 +48,18 @@ html, body {
     border: 1px solid var(--vscode-input-border);
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
+    flex-shrink: 0;
+}
+
+.controls input[type="text"] {
+    width: 250px;
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--vscode-input-border);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    flex-shrink: 0;
 }
 
 /* Hide ugly spinners */

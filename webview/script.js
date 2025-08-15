@@ -8,6 +8,7 @@ const container = document.querySelector('.container');
 const deviceSelect = document.getElementById('device-select');
 const widthInput = document.getElementById('width-input');
 const heightInput = document.getElementById('height-input');
+const urlInput = document.getElementById('url-input');
 
 const BORDER_WIDTH = 16; // 8px border per side
 let loadedDevices = {}; 
@@ -97,6 +98,9 @@ window.addEventListener('message', event => {
             if (iframe) {
                 iframe.src = message.url;
             }
+            if (urlInput) {
+                urlInput.value = message.url;
+            }
             break;
         case 'updateDimensions':
             if (deviceFrame && iframe) {
@@ -154,6 +158,14 @@ deviceSelect.addEventListener('change', (event) => {
 // event listner for custom input boxes
 widthInput.addEventListener('input', handleCustomInput);
 heightInput.addEventListener('input', handleCustomInput);
+
+if (urlInput) {
+    urlInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' && iframe) {
+            iframe.src = urlInput.value;
+        }
+    });
+}
 
 // event listner: call updateScale without arguments for default load
 window.addEventListener('resize', () => updateScale());
