@@ -7,18 +7,34 @@ html, body {
     height: 100%;
     overflow: hidden; /* Prevent scrolling on the webview itself */
     font-family: 'Inter', sans-serif; /* Use Inter font */
+    display: flex;
+    flex-direction: column;
 }
 
 
 .controls {
     display: flex;
-    align-items: center;
-    gap: 8px; /* Adds space between items */
+    flex-direction: column;
+    gap: 8px; /* Adds space between rows */
     padding: 8px 15px;
     background-color: var(--vscode-sideBar-background);
     border-bottom: 1px solid var(--vscode-editorGroup-border);
     color: var(--vscode-foreground);
     font-family: 'Inter', sans-serif;
+}
+
+.top-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.bottom-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .controls label {
@@ -34,6 +50,7 @@ html, body {
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
     margin-right: 15px;
+    flex-shrink: 0;
 }
 
 .controls input[type="number"] {
@@ -45,6 +62,29 @@ html, body {
     border: 1px solid var(--vscode-input-border);
     background-color: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
+    flex-shrink: 0;
+}
+
+.controls input[type="text"] {
+    font-size: 13px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--vscode-input-border);
+    background-color: var(--vscode-input-background);
+    color: var(--vscode-input-foreground);
+    flex: 1;
+    min-width: 0;
+}
+
+.bottom-controls button {
+    font-size: 16px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--vscode-button-border, var(--vscode-input-border));
+    background-color: var(--vscode-button-background);
+    color: var(--vscode-button-foreground);
+    cursor: pointer;
+    flex-shrink: 0;
 }
 
 /* Hide ugly spinners */
@@ -59,8 +99,7 @@ html, body {
 
 /* The container now takes up the remaining space */
 .container {
-    /* calc(100% - 45px) accounts for the height of the controls bar */
-    height: calc(100% - 45px); 
+    flex: 1;
     width: 100%;
     position: relative;
     padding: 20px;

@@ -101,14 +101,19 @@ class MobilePreviewPanel {
             </head>
             <body>
                 <div class="controls">
-                    <label for="device-select">Device:</label>
-                    <select id="device-select">
+                    <div class="top-controls">
+                        <label for="device-select">Device:</label>
+                        <select id="device-select">
                         </select>
-    
-                    <label for="width-input">Size:</label>
-                    <input type="number" id="width-input" />
-                    <span>x</span>
-                    <input type="number" id="height-input" />
+                        <label for="width-input">Size:</label>
+                        <input type="number" id="width-input" />
+                        <span>x</span>
+                        <input type="number" id="height-input" />
+                    </div>
+                    <div class="bottom-controls">
+                        <input type="text" id="url-input" />
+                        <button id="refresh-button" title="Refresh">&#x21bb;</button>
+                    </div>
                 </div>
                 <div class="container">
                     <div class="device-frame">
@@ -202,7 +207,9 @@ export function activate(context: vscode.ExtensionContext) {
             placeHolder: 'e.g., 400'
         });
 
-        if (!widthStr) return;
+        if (!widthStr) {
+            return;
+        }
         const width = parseInt(widthStr, 10);
         if (isNaN(width) || width <= 0) {
             vscode.window.showErrorMessage('Invalid width. Please enter a positive number.');
@@ -214,7 +221,9 @@ export function activate(context: vscode.ExtensionContext) {
             placeHolder: 'e.g., 700'
         });
 
-        if (!heightStr) return;
+        if (!heightStr) {
+            return;
+        }
         const height = parseInt(heightStr, 10);
         if (isNaN(height) || height <= 0) {
             vscode.window.showErrorMessage('Invalid height. Please enter a positive number.');
