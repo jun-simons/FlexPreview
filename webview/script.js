@@ -9,6 +9,7 @@ const deviceSelect = document.getElementById('device-select');
 const widthInput = document.getElementById('width-input');
 const heightInput = document.getElementById('height-input');
 const urlInput = document.getElementById('url-input');
+const refreshButton = document.getElementById('refresh-button');
 
 const BORDER_WIDTH = 16; // 8px border per side
 let loadedDevices = {}; 
@@ -162,6 +163,14 @@ heightInput.addEventListener('input', handleCustomInput);
 if (urlInput) {
     urlInput.addEventListener('keydown', (event) => {
         if (event.key === 'Enter' && iframe) {
+            iframe.src = urlInput.value;
+        }
+    });
+}
+
+if (refreshButton) {
+    refreshButton.addEventListener('click', () => {
+        if (iframe && urlInput) {
             iframe.src = urlInput.value;
         }
     });
