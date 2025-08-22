@@ -39,6 +39,13 @@ This extension does not contribute any VS Code settings at this time.
 
 ## Release Notes
 
+## 1.0.4
+
+Additions:
+* URL input box
+* Reload button
+* Fixed horizontal scrolling in menu bar
+
 ## 1.0.3
 
 Additions:
