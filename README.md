@@ -39,7 +39,7 @@ This extension does not contribute any VS Code settings at this time.
 
 ## Release Notes
 
-## 1.0.4
+## 1.1.0
 
 Additions:
 * URL input box
