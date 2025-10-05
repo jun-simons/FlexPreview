@@ -57,6 +57,7 @@ Additions:
 * URL input box
 * Reload button
 * Fixed horizontal scrolling in menu bar
+* Improved instructions
 
 ## 1.0.3
 
